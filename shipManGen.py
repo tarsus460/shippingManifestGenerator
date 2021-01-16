@@ -1,4 +1,4 @@
-import csv,os
+import csv
 
 issueList = {1:'broken screen',2:'broken keyboard'}
 
