@@ -1,25 +1,20 @@
-import csv
+import csv,re
 
 issueList = {1:'broken screen',2:'broken keyboard'}
 
+tagModels = [('.*33','Dell 3100'),('P20.*','Lenovo 300e'),('.*962','Dell Chromebook 11'),
+             ('5CD026.*','HP Chromebook x360'),('5CD.*','HP Chromebook 11/14'),
+             ('MP1.*','Lenovo Chromebook 14e'),('LR0.*','Lenovo N42')]
+
+def lookups(s,directory):
+        for pattern,device in directory:
+                if re.search(pattern,s):
+                        return device
+        return input('Model: ')
+
 def lineWriter():
         assetTag = input('AssetTag: ')
-        if assetTag.endswith('33'):
-                model = 'Dell 3100'
-        elif assetTag.startswith('P20'):
-                model = 'Lenovo 300e'
-        elif assetTag.endswith('962'):
-                model = 'Dell Chromebook 11'
-        elif assetTag.startswith('5CD026'):
-                model = 'HP Chromebook x360'
-        elif assetTag.startswith('5CD'):
-                model = 'HP Chromebook 11/14'
-        elif assetTag.startswith('MP1'):
-                model = 'Lenovo Chromebook 14e'
-        elif assetTag.startswith('LR0'):
-                model = 'Lenovo N42'
-        else:
-                model = input('Model: ')
+        model = lookups(assetTag,tagModels)
         print(issueList)
         issue = int(input('Issue: '))
         if issue in issueList.keys():
