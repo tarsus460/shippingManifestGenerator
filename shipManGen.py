@@ -31,7 +31,7 @@ def lineWriter():
                 spam = csv.writer(manifest)
                 spam.writerow(rowList)
         prompt = input('Add another device? Y/N ')
-        if prompt.upper() == 'Y':
+        if prompt.upper() == 'Y' or prompt == '':
                 lineWriter()
         elif prompt.upper() == 'N':
                 print('Drink Coke Play Again.')
